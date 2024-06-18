@@ -35,4 +35,9 @@ public class CustomerJourneyService {
     public void deleteCustomerJourney(Long customerJourneyID) {
         customerJourneyRepository.deleteById(customerJourneyID);
     }
+
+    public Iterable<CustomerJourney> getCustomerJourneyByServiceName(String serviceName) {
+   
+        throw new UnsupportedOperationException("Unimplemented method 'getCustomerJourneyByServiceName'");
+    }
 }

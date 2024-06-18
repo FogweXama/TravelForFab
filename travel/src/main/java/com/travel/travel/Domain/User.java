@@ -2,7 +2,12 @@ package com.travel.travel.Domain;
 
 import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tblUser")
@@ -16,22 +21,17 @@ public class User {
     private String phoneNumber;
 
     @OneToMany(mappedBy="user")
-    List<CustomerJourney> ticket;
-
-    public User(Long userID, String name, String email, String phoneNumber, List<CustomerJourney> ticket) {
+    List<CustomerJourney> tickets;
+    public User() {
+		
+	}
+    public User(Long userID, String name, String email, String phoneNumber) {
         this.userID = userID;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.ticket = ticket;
     }
-    public List<CustomerJourney> getTicket() {
-        return ticket;
-    }
-    public void setTicket(List<CustomerJourney> ticket) {
-        this.ticket = ticket;
-    }
-    // Getters and setters
+
     public Long getUserID() {
         return userID;
     }

@@ -18,7 +18,6 @@ public class SeatService{
         return seatRepository.save(seat);
     }
 
-
     public List<Seat> getAllSeats() {
         return seatRepository.findAll();
     }
@@ -34,5 +33,11 @@ public class SeatService{
 
     public void deleteSeat(Long seatID) {
         seatRepository.deleteById(seatID);
+    }
+
+
+    public Iterable<Seat> getSeatByServiceName(String serviceName) {
+    
+        throw new UnsupportedOperationException("Unimplemented method 'getSeatByServiceName'");
     }
 }

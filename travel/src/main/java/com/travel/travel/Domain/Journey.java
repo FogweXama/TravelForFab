@@ -5,7 +5,15 @@ package com.travel.travel.Domain;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tblJourney")
@@ -24,6 +32,13 @@ public class Journey {
     @OneToMany(mappedBy="journey")
     private List<Seat> seats; 
     
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
+    @JoinColumn(name = "scheduleID",nullable = false, insertable = false, updatable=false)
+    private Schedule schedule;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="busID", nullable = false, insertable = false, updatable = false)
+    private Bus bus;
 
     public Long getJourneyID() {
         return journeyID;
@@ -67,6 +82,9 @@ public class Journey {
     public void setDay(Date day) {
         this.day = day;
     }
+    public Journey() {
+		
+	}
     // Getters and setters
     public Journey(Long journeyID, String destination, String origin, Long scheduleID, Long busID, Double cost,
             Date day) {

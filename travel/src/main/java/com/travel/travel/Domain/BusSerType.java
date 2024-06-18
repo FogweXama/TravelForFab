@@ -1,12 +1,13 @@
 package com.travel.travel.Domain;
 
-import java.io.Serializable;
+
 import java.util.List;
 
 import jakarta.persistence.*;
 
 @Entity
-public class BusSerType  implements Serializable{
+@Table(name = "tblBusService")
+public class BusSerType{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="serviceID", nullable = false)
@@ -19,6 +20,9 @@ public class BusSerType  implements Serializable{
     @OneToMany(mappedBy="serviceb",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Bus> buses; 
 
+    public BusSerType() {
+		
+	}
     public BusSerType(Long serviceID, String serviceName, String serviceDescription) {
         this.serviceID = serviceID;
         this.serviceName = serviceName;
@@ -51,9 +55,7 @@ public class BusSerType  implements Serializable{
         return buses;
     }
 
-    /**
-     * @param buses the buses to set
-     */
+    
     public void setBuses(List<Bus> buses) {
         this.buses = buses;
     }

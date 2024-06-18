@@ -35,4 +35,9 @@ public class UserService {
     public void deleteUser(Long userID) {
         userRepository.deleteById(userID);
     }
+
+    public Iterable<User> getServiceByServiceName(String serviceName) {
+     
+        throw new UnsupportedOperationException("Unimplemented method 'getServiceByServiceName'");
+    }
 }

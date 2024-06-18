@@ -1,6 +1,6 @@
 package com.travel.travel.Domain;
-
-import java.security.Timestamp;
+ 
+import java.util.Date;
 
 import jakarta.persistence.*;
 
@@ -9,12 +9,16 @@ import jakarta.persistence.*;
 public class CustomerJourney {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name="ticketID")
     private Long ticketID;
-
+    //@Column(name="userID")
     private Long userID;
+    //@Column(name = "seatID")
     private Long seatID;
-    private Timestamp timepaid;
-    private Boolean paymentStatus=false;
+    //@Column(name = "timepaid")
+    private Date timepaid;
+    //@Column(name = "paymentStatus")
+    private Boolean paymentStatus;
 
     /* 
      * 
@@ -33,26 +37,28 @@ public class CustomerJourney {
         List<seat> chosenSeats;
 
     */
+     
+   
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, optional = false)
     @JoinColumn(name="userID",insertable = false, updatable = false )
-    User user;
+    private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, optional = false)
     @JoinColumn(name="seatID", insertable = false, updatable = false)
-    Seat seat;
+    private Seat seat;
 
 
-    public CustomerJourney(Long ticketID, Long userID, Long seatID, Timestamp timepaid, Boolean paymentStatus,
-            User user, Seat seat) {
+    public CustomerJourney(Long ticketID, Long userID, Long seatID, Date timepaid, Boolean paymentStatus) {
         this.ticketID = ticketID;
         this.userID = userID;
         this.seatID = seatID;
         this.timepaid = timepaid;
         this.paymentStatus = paymentStatus;
-        this.user = user;
-        this.seat = seat;
     }
+    public CustomerJourney() {
+		
+	}
     public Long getTicketID() {
         return ticketID;
     }
@@ -83,10 +89,10 @@ public class CustomerJourney {
     public void setSeatID(Long seatID) {
         this.seatID = seatID;
     }
-    public Timestamp getTimepaid() {
+    public Date getTimepaid() {
         return timepaid;
     }
-    public void setTimepaid(Timestamp timepaid) {
+    public void setTimepaid(Date timepaid) {
         this.timepaid = timepaid;
     }
     public Boolean getPaymentStatus() {

@@ -3,8 +3,14 @@ package com.travel.travel.Domain;
 
 
 import java.util.Date;
+import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tblSchedule")
@@ -17,11 +23,17 @@ public class Schedule {
     //change to sqlDatetime if it disturbs
     private Date departureTime;
 
+    @OneToMany(mappedBy = "schedule")
+    private List<Journey> journeys;
+    
     public Schedule(Long scheduleID, String scheduleName, Date departureTime) {
         this.scheduleID = scheduleID;
         this.scheduleName = scheduleName;
         this.departureTime = departureTime;
     }
+    public Schedule() {
+		
+	}
     
     public Long getScheduleID() {
         return scheduleID;
